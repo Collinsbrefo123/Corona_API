@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Country information{% endblock %}
+{% block content %}
+{% load humanize %}
+<h2>Country name: {{ countrydata.name }} </h2>
+<p>Cases Confirmed: {{ countrydata.latest_data.confirmed|intcomma }}</p>
+<p>Cases Recovered: {{ countrydata.latest_data.recovered|intcomma }}</p>
+<p>Cases Critical: {{ countrydata.latest_data.critical|intcomma }}</p>
+<p>Cases Death: {{ countrydata.latest_data.deaths|intcomma }}</p>
+
+<h3>Today Statistics</h3>
+<p>Cases confirmed: {{ countrydata.today.confirmed|intcomma }} </p>
+<p>Cases confirmed: {{ countrydata.today.deaths|intcomma }} </p>
+
+
+{% endblock %}
