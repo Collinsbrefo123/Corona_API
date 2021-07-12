@@ -2,16 +2,60 @@
 
 {% block title %}Country information{% endblock %}
 {% block content %}
-{% load humanize %}
-<h2>Country name: {{ countrydata.name }} </h2>
-<p>Cases Confirmed: {{ countrydata.latest_data.confirmed|intcomma }}</p>
-<p>Cases Recovered: {{ countrydata.latest_data.recovered|intcomma }}</p>
-<p>Cases Critical: {{ countrydata.latest_data.critical|intcomma }}</p>
-<p>Cases Death: {{ countrydata.latest_data.deaths|intcomma }}</p>
+    {% load humanize %}
 
-<h3>Today Statistics</h3>
-<p>Cases confirmed: {{ countrydata.today.confirmed|intcomma }} </p>
-<p>Cases confirmed: {{ countrydata.today.deaths|intcomma }} </p>
+
+
+    <div class="text-center mx-auto" style="width: 40rem">
+            <h2 class="text-uppercase text-white font-weight-bold pt-3 pb-3">Country name: {{ countrydata.name }} </h2>
+
+        <table class="table">
+
+            <tbody>
+
+            <tr class="table-info ">
+                <th scope="row">Confirmed Cases</th>
+                <td>{{ countrydata.latest_data.confirmed|intcomma }}</td>
+            </tr>
+            <tr class="table-success">
+                <th scope="row">Recovered Cases</th>
+                <td>{{ countrydata.latest_data.recovered|intcomma }}</td>
+            </tr>
+
+            <tr class="table-danger">
+                <th scope="row">Death Cases</th>
+
+                <td>{{ countrydata.latest_data.deaths|intcomma }}</td>
+            </tr>
+            <tr class="table-warning">
+                <th scope="row">Critical Cases</th>
+                <td>{{ countrydata.latest_data.critical|intcomma }}</td>
+            </tr>
+
+
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center mx-auto" style="width: 40rem">
+    <h2 class="text-info text-uppercase">Today's Statistics</h2>
+        <table class="table">
+
+            <tbody>
+
+            <tr class="table-info ">
+                <th scope="row">Confirmed Cases</th>
+                <td>{{ countrydata.today.confirmed|intcomma }}</td>
+            </tr>
+
+            <tr class="table-danger">
+                <th scope="row">Death Cases</th>
+
+                <td>{{ countrydata.today.deaths|intcomma }}</td>
+            </tr>
+
+            </tbody>
+        </table>
+    </div>
 
 
 {% endblock %}

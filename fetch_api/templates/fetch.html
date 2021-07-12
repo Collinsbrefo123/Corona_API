@@ -3,15 +3,17 @@
 {% block title %}Countries{% endblock %}
 
 {% block content %}
-    <div>
-        <nav class="navbar navbar-dark bg-info mx-auto text-center" style="width: 60rem;">
-            <form class="form-inline mx-auto text-center">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
+            <h2 class="text-center text-uppercase text-info font-weight-bold">Countries affected with Corona virus:{{ count }} Countries</h2>
+
+    <div >
+        <nav class="pt-2 navbar navbar-dark bg-light mx-auto text-center rounded" style="width: 60rem;">
+            <form action="{% url 'fetchapi' %}" enctype='multipart/form-data' class="form-inline mx-auto text-center">
+                {% csrf_token %}
+                <input class="form-control mr-sm-2 text-capitalize" type="search" name="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Search</button>
             </form>
         </nav>
-        <h2 class="text-center">Countries affected with Corona virus</h2>
-        <ol class="list-group text-center mx-auto" style="width: 48rem;">
+        <ol class="pt-3 list-group text-center mx-auto" style="width: 48rem;">
             {% for req in pages.object_list %}
                 <li class="list-group-item"><a href="{% url 'fetchcountry' req.code %}">{{ req.name }}</a></li>
                 {#            <p>{{ req.latest_data }}</p>#}
@@ -36,7 +38,7 @@
                                 <a class="page-link" href="?page={{ page }}">{{ page }} <span
                                         class="sr-only">(current)</span></a>
                             </li>
-                        {% elif page > pages.number|add:-6 and page < pages.number|add:6 %}
+                        {% elif page > pages.number|add:-1 and page < pages.number|add:6 %}
                             <li class="page-item"><a class="page-link " href="?page={{ page }}">{{ page }}</a></li>
                         {% endif %}
 

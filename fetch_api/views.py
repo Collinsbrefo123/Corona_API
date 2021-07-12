@@ -5,9 +5,28 @@ from django.shortcuts import render
 
 # Create your views here.
 def fetchapi(request):
+
+    # if request.method == 'P0ST':
+    #     search_query = request.GET.get('search', '')
+
+
+
     response = rq.get('https://corona-api.com/countries', ).json()
+
     response_data = response['data']
-    print(len(response_data))
+    count = len(response_data)
+    print(count)
+    #searching for the name
+    search_query = request.GET.get('search', '').capitalize()
+    print(search_query)
+    if search_query:
+        for idx,num in enumerate(response_data):
+            if num['name'] == search_query:
+                print(num['name'])
+                print(response_data[idx])
+                response_data =[response_data[idx]]
+
+
     page_number = request.GET.get('page', 1)
     paginator = Paginator(response_data, 10)
     page = paginator.get_page(page_number)
@@ -21,11 +40,11 @@ def fetchapi(request):
         prev_url = f'?page={page.previous_page_number()}'
     else:
         prev_url = ''
-    print(page.object_list)
-    print(paginator.page_range)
+
+    # print(paginator.page_range)
 
     return render(request, 'fetch.html',
-                  {'response': page.object_list, 'pages': page, 'next_url': next_url, 'prev_url': prev_url})
+                  {'response': page.object_list, 'pages': page, 'next_url': next_url, 'prev_url': prev_url, 'count':count})
 
 
 def fetchcountry(request, code):

@@ -19,7 +19,7 @@ from fetch_api import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('fetch/', views.fetchapi, name='fetchapi'),
+    path('', views.fetchapi, name='fetchapi'),
     path('country/<str:code>', views.fetchcountry, name='fetchcountry')
 ]
 
